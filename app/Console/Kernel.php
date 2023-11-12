@@ -2,38 +2,29 @@
 
 namespace App\Console;
 
+use App\Models\Globals;
+use App\Tasks\DailyAttendanceHandle;
+use App\Tasks\MonthlyPayrollsHandle;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
     /**
-     * The Artisan commands provided by your application.
-     *
-     * @var array
-     */
-    protected $commands = [
-        //
-    ];
-
-    /**
      * Define the application's command schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
-     * @return void
      */
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        // This will use the timezone set at config/app.php
+        // $schedule->call(new DailyAttendanceHandle())->daily();    // Every Day at 00:00
+        // $schedule->command('activitylog:clean')->twiceMonthly(1, 16, '00:00'); // Clear Activity Log
+        // $schedule->call(new MonthlyPayrollsHandle())->monthlyOn(Globals::first()->payroll_day, '00:00');  // The first day of every month at 00:00
     }
 
     /**
      * Register the commands for the application.
-     *
-     * @return void
      */
-    protected function commands()
+    protected function commands(): void
     {
         $this->load(__DIR__.'/Commands');
 

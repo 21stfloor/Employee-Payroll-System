@@ -1,121 +1,80 @@
 <?php
 
-/*application configration routes*/
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
+
 /*
-Route::group(['prefix'=>'clear'],function(){
-	Route::get('cache', function () {
-	    \Artisan::call('cache:clear');
-	    dd("Cache is cleared");
-	});
-	Route::get('view', function () {
-	    \Artisan::call('view:clear');
-	    dd("View is cleared");
-	});
-	Route::get('route', function () {
-		\Artisan::call('route:clear');
-		dd("route is cleared");
-	});
-	Route::get('event', function () {
-		\Artisan::call('event:clear');
-		dd("Events is cleared");
-	});
-});
-
-Route::get('config-cache', function () {
-	\Artisan::call('config:cache');
-	dd("Config is cached.");
-});
-
-Route::get('storage-link', function () {
-	\Artisan::call('storage:link');
-	dd("Storage link successfully.");
-});
-
-Route::get('sym-storage-link', function () {
-	$targetFolder = $_SERVER['DOCUMENT_ROOT'].'/storage/app/public';
-	$linkFolder = $_SERVER['DOCUMENT_ROOT'].'/public/storage';
-	symlink($targetFolder,$linkFolder);
-	dd('Symlink process successfully completed');
-});
-
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
 */
-/* end of application configration routes*/
-Route::get('/','Admin\DashboardController@dashboard')->middleware('RedirectWhenNotLogin')->name('dash');
 
-// checkin routes
-Route::get('/checkin',"Admin\CheckInController@checkin")->name('admin.checkin.index');
-Route::post('/checkin',"Admin\CheckInController@store")->name('admin.checkin.store');
-Route::put('/checkin',"Admin\CheckInController@update")->name('admin.checkin.update');
+Route::group(['middleware' => ['role:admin', 'auth']], function () {
 
-Route::group(['namespace'=>'Admin','as'=>'admin.'],function(){
-	
-	Route::group(['namespace'=>'Auth'],function(){
-		Route::get('/login','AuthController@showLogin')->name('showLogin');
-		Route::post('/login','AuthController@login')->name('login');
-	});
+    Route::get('employees/find', [\App\Http\Controllers\EmployeeController::class, 'find'])->name('employees.find');
+    Route::get('employees/archived', [\App\Http\Controllers\EmployeeController::class, 'archivedIndex'])->name('employees.archived');
+    Route::resource('employees', \App\Http\Controllers\EmployeeController::class);
+    Route::resource('branches', \App\Http\Controllers\BranchController::class);
+    Route::resource('departments', \App\Http\Controllers\DepartmentController::class);
+    Route::resource('positions', \App\Http\Controllers\PositionController::class);
+    Route::resource('shifts', \App\Http\Controllers\ShiftController::class);
+    // Route::resource('metrics', \App\Http\Controllers\MetricsController::class);
+    Route::resource('requests', \App\Http\Controllers\RequestController::class);
 
-	Route::group(['middleware'=>'auth'],function(){
-		Route::post("/logout",'Auth\AuthController@logout')->name('logout');
+    // Payroll
+    Route::put('payrolls/{id}/updateStatus', [\App\Http\Controllers\PayrollController::class, 'updateStatus'])->name('payrolls.updateStatus');
+    Route::resource('payrolls', \App\Http\Controllers\PayrollController::class);
 
-		// media related routes
-		Route::post('/media', 'HelperController@storeMedia')->name('storeMedia');
-		Route::get('/media/showMediaFromTempFolder/{name}', 'HelperController@showMediaFromTempFolder')->name('showMediaFromTempFolder');
-		Route::post('/media/base64EncodedData', 'HelperController@storeMediaBase64')->name('storeMediaBase64');
-		Route::post('/media/removeMediaFromTempFolder/{name}', 'HelperController@removeMediaFromTempFolder')->name('removeMediaFromTempFolder');
-		Route::post('/media/removeMedia/{model}/{model_id}/{collection}', 'HelperController@removeMedia')->name('removeMedia');
-		Route::post('/confirm/password', 'HelperController@confirmPassword')->name('confirmPassword');
+    Route::get('attendance/{date}', [\App\Http\Controllers\AttendanceController::class, 'dayShow'])->name('attendance.show');
+    Route::delete('attendance', [\App\Http\Controllers\AttendanceController::class, 'dayDelete'])->name('attendance.destroy');
+    Route::resource('attendances', \App\Http\Controllers\AttendanceController::class);
 
-		// Dashboard Routes
-		Route::get("/dashboard",'DashboardController@dashboard')->name('dashboard');
-		
-		//admin profile route
-		Route::get("/profile","ProfileController@index")->name('profile.index');
-		Route::post("/profile","ProfileController@update")->name('profile.update');
+    // Globals
+    // Route::get('globals', [\App\Http\Controllers\GlobalsController::class, 'index'])->name('globals.index');
+    // Route::get('globals/edit', [\App\Http\Controllers\GlobalsController::class, 'edit'])->name('globals.edit');
+    // Route::put('globals/edit', [\App\Http\Controllers\GlobalsController::class, 'update'])->name('globals.update');
 
-		//position routes
-		Route::resource('position','PositionController');
-		Route::post('getdata/position',"PositionController@getData")->name('position.getData');
-		Route::post('all-delete/position/',"PositionController@massDelete")->name('position.massDelete');
+    // Logs
+    // Route::get('logs',[\App\Http\Controllers\LogsController::class, 'index'])->name('logs.index');
 
-		//deduction routes
-		Route::resource('deduction','DeductionController');
-		Route::post('getdata/deduction',"DeductionController@getData")->name('deduction.getData');
-		Route::post('all-delete/deduction/',"DeductionController@massDelete")->name('deduction.massDelete');
+    // Calendar
+    // Route::get('calendar', [\App\Http\Controllers\CalendarController::class, 'calendarIndex'])->name('calendar.index');
+    // Route::resource('calendars', \App\Http\Controllers\CalendarController::class);
 
-		//schedule routes
-		Route::resource('schedule','ScheduleController');
-		Route::post('getdata/schedule',"ScheduleController@getData")->name('schedule.getData');
-		Route::post('all-delete/schedule/',"ScheduleController@massDelete")->name('schedule.massDelete');
 
-		//employee routes
-		Route::resource('employee','EmployeeController');
-		Route::post('getdata/employee',"EmployeeController@getData")->name('employee.getData');
-		Route::post('get-employees-data',"EmployeeController@getDataTable")->name('employee.getDataTable');
-		Route::post('all-delete/employee/',"EmployeeController@massDelete")->name('employee.massDelete');
-
-		//overtime routes
-		Route::resource('overtime','OvertimeController');
-		Route::post('getdata/overtime',"OvertimeController@getData")->name('overtime.getData');
-		Route::post('get-overtime-data',"OvertimeController@getDataTable")->name('overtime.getDataTable');
-		Route::post('all-delete/overtime/',"OvertimeController@massDelete")->name('overtime.massDelete');
-
-		//cashadvance routes
-		Route::resource('cashadvance','CashAdvanceController');
-		Route::post('getdata/cashadvance',"CashAdvanceController@getData")->name('cashadvance.getData');
-		Route::post('get-cashadvance-data',"CashAdvanceController@getDataTable")->name('cashadvance.getDataTable');
-		Route::post('all-delete/cashadvance/',"CashAdvanceController@massDelete")->name('cashadvance.massDelete');
-
-		//attendance routes
-		Route::resource('attendance','AttendanceController');
-		Route::post('getdata/attendance',"AttendanceController@getData")->name('attendance.getData');
-		Route::post('get-attendance-data',"AttendanceController@getDataTable")->name('attendance.getDataTable');
-		Route::post('all-delete/attendance/',"AttendanceController@massDelete")->name('attendance.massDelete');
-
-		//payroll routes
-		Route::get('payroll',"PayrollController@index")->name('payroll.index');
-		Route::post('getdata/payroll',"PayrollController@getData")->name('payroll.getData');
-		Route::post('get-payroll-data',"PayrollController@getDataTable")->name('payroll.getDataTable');
-		Route::post('payroll/download-payroll',"PayrollController@payrollExportPDF")->name('payroll.payrollExportPDF');
-		Route::post('payroll/download-payslip',"PayrollController@payslipExportPDF")->name('payroll.payslipExportPDF');
-	});
 });
+
+// Logged
+Route::group(['middleware' => ['auth']], function () {
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
+
+    Route::get('my-profile', [\App\Http\Controllers\EmployeeController::class, 'showMyProfile'])->name('my-profile');
+    Route::resource('requests', \App\Http\Controllers\RequestController::class)->only(['index', 'show', 'create', 'store']);
+    Route::resource('payrolls', \App\Http\Controllers\PayrollController::class)->only(['index', 'show']);
+    // Route::get('calendar', [\App\Http\Controllers\CalendarController::class, 'calendarIndex'])->name('calendar.index');
+
+    Route::get('my-attendance', [\App\Http\Controllers\AttendanceController::class, 'attendanceDashboard'])->name('attendance.dashboard');
+    Route::post('attendance/signin', [\App\Http\Controllers\AttendanceController::class, 'dashboardSignInAttendance'])->name('attendance.dashboardSignIn');
+    Route::post('attendance/signoff', [\App\Http\Controllers\AttendanceController::class, 'dashboardSignOffAttendance'])->name('attendance.dashboardSignOff');
+
+});
+
+// Redirect authenticated users to the dashboard
+Route::redirect('/', '/dashboard')->middleware('auth');
+
+// Language Switching
+Route::get('language/{language}', function ($language) {
+    Session()->put('locale', $language);
+    return redirect()->back();
+})->name('language');
+
+require __DIR__.'/auth.php';

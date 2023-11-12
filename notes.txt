@@ -1,28 +1,37 @@
 employee
-	attendance (time in time out)
-	payroll
-	not moving the cursor (notify employee, should click within 1 minute, failing to do so will give bad record)
-	self-assigned tasks (max 5 task first before getting new tasks)
+	*attendance (time in time out)
+	*absent form
+	*payroll (automatic)	
+	*register own account but wait for the admin to give them their token
 	show productivity of own
 	screenshot current work
-	register own account but wait for the admin to give them their token
 	productivity is based on tasks
 	confirmation if OT or not OT page
-	absent form
+	not moving the cursor (notify employee, should click within 1 minute, failing to do so will give bad record)
+	self-assigned tasks (max 5 task first before getting new tasks)
 	
 	
 manager
-	manage other manager accounts
-	delete employee
-	manage registration tokens
+	*manage other manager accounts
+	*delete employee
+	*attendance (time in time out)
+	*view attendance of employees
+	*manage absences request (change status)
+	Tasks creation
+	OT message to send to employee
 	dropdown employee productivity chart	
-	manage absences request (change status)
-	payroll table encoding
-	attendance (time in time out)
-	view attendance of employees
+	payroll generate button
+	
 	Download records :excel format
 	download calendar(absences)
 	download attendance(all employees)
 	Download productivity (1 employee per sheet)
 	Download payroll
-	OT message to send to employee
+	manage registration tokens
+
+
+*edit login page
+*remove calendar
+replace logo
+*remove translation
+*remove metrics

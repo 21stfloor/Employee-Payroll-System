@@ -3,10 +3,10 @@ employee
 	*absent form
 	*payroll (automatic)	
 	*register own account but wait for the admin to give them their token
+	*confirmation if OT or not OT page
 	show productivity of own
 	screenshot current work
 	productivity is based on tasks
-	confirmation if OT or not OT page
 	not moving the cursor (notify employee, should click within 1 minute, failing to do so will give bad record)
 	self-assigned tasks (max 5 task first before getting new tasks)
 	

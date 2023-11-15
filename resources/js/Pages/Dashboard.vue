@@ -244,7 +244,7 @@ onMounted(() => {
                                              :text="employee_stats['totalAbsenceSoFar'] + (employee_stats['totalAbsenceSoFar'] > 0 ? __('Day(s)') : '')"/>
 
                             </div>
-                            <div class="flex flex-col lg:flex-row justify-between align-middle mb-6 sm:mb-2">
+                            <!-- <div class="flex flex-col lg:flex-row justify-between align-middle mb-6 sm:mb-2">
                                 <p class="w-full sm:w-1/3">{{ __('Hours:') }}
                                     <ToolTip direction="bottom">
                                         {{ __('Number of Overtime/Undertime Hours (so far).') }}<br/>
@@ -255,7 +255,7 @@ onMounted(() => {
                                              :percentage="employee_stats['hoursDifferenceSoFar']"
                                              :text="employee_stats['hoursDifferenceSoFar'] === 0 ? '' :Math.abs(employee_stats['hoursDifferenceSoFar']).toFixed(2) + ' ' + __('Hours') +' ' + (employee_stats['hoursDifferenceSoFar'] > 0 ? __('extra') : __('late'))"
                                              :color="employee_stats['hoursDifferenceSoFar'] > 0 ? 'bg-green-500' : 'bg-red-500' "/>
-                            </div>
+                            </div> -->
                         </div>
                     </Card>
                 </div>

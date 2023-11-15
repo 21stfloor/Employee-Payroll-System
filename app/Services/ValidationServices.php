@@ -229,6 +229,7 @@ Class ValidationServices extends Controller {
             'date' => ['array','size:2'],
             'date.*' => ['nullable', 'date_format:Y-m-d'],
             'message' => ['nullable', 'string'],
+            'receiver_id' => ['nullable', 'exists:employees,id'],
         ], $this->validationMessages);
     }
 

@@ -23,6 +23,7 @@ const form = useForm({
     type: '',
     date: '',
     message: '',
+    receiver_id: '',
 });
 
 watch(() => form.type, (value) => {

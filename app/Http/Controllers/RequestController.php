@@ -87,6 +87,7 @@ class RequestController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $test = 0;
         $this->requestServices->updateRequest($request, $id);
     }
 

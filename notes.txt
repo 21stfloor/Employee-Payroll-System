@@ -6,9 +6,9 @@ employee
 	*confirmation if OT or not OT page
 	*self-assigned tasks (max 5 task first before getting new tasks)
 	*upload files/screenshot current work
-	show productivity chart of own
-	productivity is based on tasks
-	not moving the cursor (notify employee, should click within 1 minute, failing to do so will give bad record)
+	*show productivity chart of own
+	*productivity is based on tasks
+	*not moving the cursor (notify employee, should click within 1 minute, failing to do so will give bad record)
 	
 	
 manager
@@ -20,7 +20,7 @@ manager
 	*Tasks creation
 	*OT message to send to employee	
 	*payroll generate button
-	dropdown employee productivity chart	
+	*dropdown employee productivity chart	
 	
 	Download records :excel format
 	*download calendar(absences)
@@ -33,3 +33,8 @@ manager
 
 php artisan monthly-payrolls:run
 php artisan up
+
+php artisan config:clear
+php artisan route:clear
+php artisan cache:clear 
+php artisan view:clear

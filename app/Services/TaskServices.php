@@ -35,8 +35,13 @@ class TaskServices
             // 'admin_response' => ['nullable', 'string'],
         ]);
 
-        $taskData['employee_id'] = $request->user()->id;
+
+        
         $empTask = \App\Models\Task::findOrFail($id);
+
+        if($empTask->employee == null){
+            $taskData['employee_id'] = $request->user()->id;
+        }
 
         // Check if file_path exists in the request and is not empty
         if ($request->hasFile('file_path')) {

@@ -58,16 +58,33 @@ class ShiftController extends Controller
     public function show(string $id, Request $request)
     {
         $shift = Shift::withCount("employees")->findOrFail($id);
+        $databaseType = strtolower(env('DB_CONNECTION', 'mysql')); // Retrieve the database type from env
+
         $employees = $shift->employees()
-            ->where(function ($query) use ($request) {
-                $query->where('employees.name', 'ILIKE', '%' . $request->term . '%')
-                    ->orWhere('employees.email', 'ILIKE', '%' . $request->term . '%')
-                    ->orWhere('employees.id', 'ILIKE', '%' . $request->term . '%')
-                    ->orWhere('employees.phone', 'ILIKE', '%' . $request->term . '%')
-                    ->orWhere('employees.employee_id', 'ILIKE', '%' . $request->term . '%');
+            ->where(function ($query) use ($request, $databaseType) {
+                $term = '%' . $request->term . '%';
+                $query->where('employees.name', 'LIKE', $term)
+                    ->orWhere('employees.email', 'LIKE', $term)
+                    ->orWhere('employees.id', 'LIKE', $term)
+                    ->orWhere('employees.phone', 'LIKE', $term)
+                    ->orWhere('employees.employee_id', 'LIKE', $term);
+
+                if ($databaseType === 'pgsql') {
+                    $query->orWhereRaw('LOWER(employees.name) ILIKE LOWER(?)', [$request->term])
+                        ->orWhereRaw('LOWER(employees.email) ILIKE LOWER(?)', [$request->term])
+                        ->orWhereRaw('LOWER(employees.id::text) ILIKE LOWER(?)', [$request->term])
+                        ->orWhereRaw('LOWER(employees.phone) ILIKE LOWER(?)', [$request->term])
+                        ->orWhereRaw('LOWER(employees.employee_id) ILIKE LOWER(?)', [$request->term]);
+                }
             })
             ->orderBy('employees.id')
-            ->paginate(config('constants.data.pagination_count'), ['employees.id', 'employees.name', 'employees.phone', 'employees.email', 'employees.employee_id']);
+            ->paginate(config('constants.data.pagination_count'), [
+                'employees.id',
+                'employees.name',
+                'employees.phone',
+                'employees.email',
+                'employees.employee_id'
+            ]);
 
         return Inertia::render('Shift/ShiftView', [
             'shift' => $shift,

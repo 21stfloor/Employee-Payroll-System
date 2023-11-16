@@ -165,10 +165,10 @@ const destroy = () => {
 
                             <DescriptionListItem colored>
                                 <DT>{{__('Status')}}</DT>
-                                <DD>{{  task.status === "Available" ? task_status_types['available'] + ' ❇️' :
-                                        task.status === "Ongoing" ? task_status_types['ongoing'] + ' ⏳' :
-                                        task.status === "Done" ? task_status_types['done'] + ' ✅' :
-                                        task.status === "Approved" ? task_status_types['approved'] + ' 👌' :
+                                <DD>{{  props.task.status === "Available" ? task_status_types['available'] + ' ❇️' :
+                                        props.task.status === "Ongoing" ? task_status_types['ongoing'] + ' ⏳' :
+                                        props.task.status === "Done" ? task_status_types['done'] + ' ✅' :
+                                        props.task.status === "Approved" ? task_status_types['approved'] + ' 👌' :
                                             task_status_types['rejected'] + ' 🚫'
                                     }}</DD>
                             </DescriptionListItem>
@@ -183,10 +183,10 @@ const destroy = () => {
                             
                             
                             <div  class="flex inline-flex gap-4">
-                                <form v-if="!$page.props.auth.user.roles.includes('admin') " @submit.prevent="submit"  class="flex gap-4" enctype="multipart/form-data">
-                                    
+                                <form @submit.prevent="submit"  class="flex gap-4" enctype="multipart/form-data">
+                                    <div v-if="!$page.props.auth.user.roles.includes('admin') ">
                                     <div v-if="task.employee != null && task.employee.id == $page.props.auth.user.id" class="grid grid-cols-2 gap-4">
-                                            <div v-if="task.status == 'Ongoing'">
+                                            <div v-if="(task.status === 'Ongoing' || task.status === 'Rejected')">
                                                 <InputLabel for="file_path" :value="__('File Upload')"/>
                                                 
                                                 <!-- <FileInput
@@ -204,7 +204,7 @@ const destroy = () => {
 
                                     <div v-if="ongoingTasksCount < 5">
                                         
-                                        <GenericButton v-if="task.status == 'Available' && task.employee == null" :text="__('Accept Task')"
+                                        <GenericButton v-if="task.status === 'Available' && task.employee == null" :text="__('Accept Task')"
                                                     @click="form.status = 1; message=__('accept');"
                                                     :class="{ 'opacity-25': form.processing }"
                                                     :disabled="form.processing">
@@ -214,27 +214,50 @@ const destroy = () => {
                                     <div v-else-if="task.status === 'Available'">
                                         <p>You can only do 5 tasks at a time</p>
                                     </div>
-                                    <GenericButton v-if="task.status == 'Ongoing' && task.employee != null && task.employee.id == $page.props.auth.user.id" :text="__('Mark as Done')"
+                                    <GenericButton v-if="(task.status === 'Ongoing' || task.status === 'Rejected')  && task.employee != null && task.employee.id == $page.props.auth.user.id" :text="__('Mark as Done')"
                                                    @click="form.status = 2; message=__('done');"
                                                    :class="{ 'opacity-25': form.processing }"
                                                    :disabled="form.processing">
                                         <CheckIcon/>
                                     </GenericButton>
+
+                                    </div>
+                                    <div v-else>
+                                        <GenericButton v-if="task.status === 'Done' && task.employee != null" :text="__('Approve')"
+                                            @click="form.status = 3; message=__('approved');"
+                                            :class="{ 'opacity-25': form.processing }"
+                                            :disabled="form.processing">
+                                            <CheckIcon/>
+                                        </GenericButton>
+
+                                        <GenericButton v-if="task.status === 'Done' && task.employee != null" :text="__('Reject')"
+                                            @click="form.status = 4; message=__('reject');"
+                                            :class="{ 'opacity-25': form.processing }"
+                                            :disabled="form.processing">
+                                            <XIcon/>
+                                        </GenericButton>
+                                    </div>
                                 </form>
+
+                                <!-- <p v-if="task.status === 'Rejected'">Reject Reason:</p> -->
 
                                 <div v-if="task.status != 'Available' && task.status != 'Ongoing'">
                                     <div v-if="task.file_path">
                                         <p>File uploaded:</p>
-                                        <a :href="'/tasks/' + task.file_path" download>Download File</a>
+                                        <a :href="'/tasks/' + task.file_path" download class="font-medium text-purple-600 dark:text-purple-500 hover:underline">Download File</a>
                                     </div>
                                     <div v-else>
                                         <p>No file uploaded</p>
                                     </div>
                                 </div>
 
+                                
                             </div>
                             
+                            
                         </div>
+
+                        
 
                         <form v-if="$page.props.auth.user.roles.includes('admin')" @submit.prevent="destroy" class="flex justify-end">
                             <PrimaryButton class="bg-red-600 hover:bg-red-700 ml-4 mt-4 focus:bg-red-500 active:bg-red-900" >

@@ -15,6 +15,7 @@ import RocketIcon from "@/Components/Icons/RocketIcon.vue";
 import UserIcon from "@/Components/Icons/UserIcon.vue";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import {router} from "@inertiajs/vue3";
+import { BxSolidDownload } from "@kalimahapps/vue-icons";
 
 const showingNavigationDropdown = ref(false);
 const isDark = useDark();
@@ -105,6 +106,11 @@ function changeLanguage(locale){
                                  :activeLinks="['payrolls.index', 'payrolls.show', 'payrolls.edit']"
                 >
                     <MoneyIcon class="text-gray-500 dark:text-gray-100"/>
+                </SidebarListItem>
+
+                <SidebarListItem :item-name="__('Downloads')" :hasBadge="false" link="downloads.index"
+                                 :active-links="['downloads.index']">
+                    <BxSolidDownload class="text-gray-500 dark:text-gray-100"/>
                 </SidebarListItem>
 
             </ul>

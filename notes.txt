@@ -18,21 +18,18 @@ manager
 	*view attendance of employees
 	*manage absences request (change status)
 	*Tasks creation
-	*OT message to send to employee
+	*OT message to send to employee	
+	*payroll generate button
 	dropdown employee productivity chart	
-	payroll generate button
 	
 	Download records :excel format
-	download calendar(absences)
-	download attendance(all employees)
+	*download calendar(absences)
+	*download attendance(all employees)
 	Download productivity (1 employee per sheet)
-	Download payroll
+	*Download payroll
 
 	manage registration tokens
 
 
-*edit login page
-*remove calendar
-replace logo
-*remove translation
-*remove metrics
+php artisan monthly-payrolls:run
+php artisan up

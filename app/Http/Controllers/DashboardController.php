@@ -7,6 +7,7 @@ use App\Services\CommonServices;
 use Carbon\Carbon;
 use Inertia\Inertia;
 
+
 class DashboardController extends Controller
 {
 
@@ -33,4 +34,8 @@ class DashboardController extends Controller
             "is_today_off" => $isTodayOff,
         ]);
     }
+
+
+    
+
 }

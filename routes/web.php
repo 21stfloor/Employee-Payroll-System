@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -46,6 +45,15 @@ Route::group(['middleware' => ['role:admin', 'auth']], function () {
     // Route::get('calendar', [\App\Http\Controllers\CalendarController::class, 'calendarIndex'])->name('calendar.index');
     // Route::resource('calendars', \App\Http\Controllers\CalendarController::class);
 
+    Route::get('/monthly-payrolls/run', function() {
+        (new \App\Tasks\MonthlyPayrollsHandle)();
+    })->name('monthly-payrolls');
+
+
+    Route::get('downloads', [\App\Http\Controllers\DownloadController::class, 'index'])->name('downloads.index');
+    Route::get('/export/attendance', [\App\Http\Controllers\DownloadController::class, 'export_attendance'])->name('export.attendance');
+    Route::get('/export/absences', [\App\Http\Controllers\DownloadController::class, 'export_absences'])->name('export.absences');
+    Route::get('/export/payroll', [\App\Http\Controllers\DownloadController::class, 'export_payroll'])->name('export.payroll');
 
 });
 

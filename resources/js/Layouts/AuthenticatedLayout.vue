@@ -54,7 +54,7 @@ function changeLanguage(locale){
             <ul v-if="$page.props.auth.user.roles.includes('admin')" class="space-y-2 font-medium mb-4">
                 <div class="flex flex-row items-center">
                     <div class="bg-purple-500 h-px flex-grow"></div>
-                    <div class=" px-2">{{__('Admin Tools')}}</div>
+                    <div class=" px-2">{{__('Manager')}}</div>
                     <div class="bg-purple-500 h-px flex-grow"></div>
                 </div>
 
@@ -154,9 +154,10 @@ function changeLanguage(locale){
                     <MoneyIcon class="text-gray-500 dark:text-gray-100"/>
                 </SidebarListItem>
 
-                <!-- <SidebarListItem :item-name="__('My Calendar')" link="calendar.index" :active-links="['calendar.index']">
-                    <CalendarIcon class="text-gray-500 dark:text-gray-100"/>
-                </SidebarListItem> -->
+
+                <SidebarListItem :item-name="__('My Performance')" link="performance.employee" :active-links="[]">
+                    <AnOutlinedBarChart class="text-gray-500 dark:text-gray-100"/>
+                </SidebarListItem>
 
                 <SidebarListItem :item-name="__('My Attendance')" link="attendance.dashboard"
                                  :active-links="['attendance.dashboard']">

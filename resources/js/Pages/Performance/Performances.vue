@@ -35,26 +35,35 @@ const props = defineProps({
 const employeeNames = Object.keys(props.tasks).map((id) => props.tasks[id].employee_name);
 const taskCounts = Object.keys(props.tasks).map((id) => props.tasks[id].task_count);
 const colors = ["#FF0000", "#00FF00", "#0000FF"];
+const monthNames = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
 
 // Generate chart data
+// const chartData = {
+//   labels: employeeNames,
+//   datasets: [{ label: employeeNames, data: taskCounts, backgroundColor: colors }],
+// };
 const chartData = {
-  labels: employeeNames,
-  datasets: [{ label: employeeNames, data: taskCounts, backgroundColor: colors }],
-};
-
+    labels: monthNames,
+    datasets: props.tasks
+}
+//[ {label: employeeNames[0], data: [40], backgroundColor: ["#FF0000"] }, {label: employeeNames[1], data: [50], backgroundColor: ["#00FF00"] } ]
 const chartOptions = {
   responsive: true,
 };
 
+console.log(props.tasks);
 </script>
 
 <template>
-  <Head :title="__('Emplyee Performance')" />
+  <Head :title="__('Employee Performance')" />
   <AuthenticatedLayout>
     <div class="py-8">
       <div class="flex flex-col md:flex-row justify-between md:gap-4" v-if="tasks">
         <Card class="!p-2 w-full">
-          <h1 class="text-2xl">{{ __('Emplyee Performance') }}</h1>
+          <h1 class="text-2xl">{{ __('Emplyee Performance') }}<small> (Task Done)</small></h1>
           <div class="flex flex-wrap justify-center gap-4">
             <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
           </div>

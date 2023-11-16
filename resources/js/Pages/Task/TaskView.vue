@@ -155,12 +155,12 @@ const destroy = () => {
 
                             <DescriptionListItem colored>
                                 <DT>{{__('Date Taken')}}</DT>
-                                <DD>{{  task.date_taken == null? 'N/A': (new Date(task.date_taken)).toISOString().split("T")[0] }}</DD>
+                                <DD>{{  task.date_taken == null? 'N/A': task.date_taken }}</DD>
                             </DescriptionListItem>
 
                             <DescriptionListItem colored>
                                 <DT>{{__('Date Completed')}}</DT>
-                                <DD>{{  task.date_completed == null? 'N/A': (new Date(task.date_completed)).toISOString().split("T")[0] }}</DD>
+                                <DD>{{  task.date_completed == null? 'N/A': task.date_completed }}</DD>
                             </DescriptionListItem>
 
                             <DescriptionListItem colored>
@@ -185,8 +185,7 @@ const destroy = () => {
                             <div  class="flex inline-flex gap-4">
                                 <form v-if="!$page.props.auth.user.roles.includes('admin') " @submit.prevent="submit"  class="flex gap-4" enctype="multipart/form-data">
                                     
-                                    <div v-if="ongoingTasksCount < 5">
-                                        <div v-if="task.employee != null && task.employee.id == $page.props.auth.user.id" class="grid grid-cols-2 gap-4">
+                                    <div v-if="task.employee != null && task.employee.id == $page.props.auth.user.id" class="grid grid-cols-2 gap-4">
                                             <div v-if="task.status == 'Ongoing'">
                                                 <InputLabel for="file_path" :value="__('File Upload')"/>
                                                 
@@ -202,6 +201,9 @@ const destroy = () => {
                                                 <InputError class="mt-2" :message="form.errors.file_path"/>
                                             </div>                                            
                                         </div>
+
+                                    <div v-if="ongoingTasksCount < 5">
+                                        
                                         <GenericButton v-if="task.status == 'Available' && task.employee == null" :text="__('Accept Task')"
                                                     @click="form.status = 1; message=__('accept');"
                                                     :class="{ 'opacity-25': form.processing }"
@@ -223,7 +225,7 @@ const destroy = () => {
                                 <div v-if="task.status != 'Available' && task.status != 'Ongoing'">
                                     <div v-if="task.file_path">
                                         <p>File uploaded:</p>
-                                        <a  :href="task.file_path" download>Download File</a>
+                                        <a :href="'/tasks/' + task.file_path" download>Download File</a>
                                     </div>
                                     <div v-else>
                                         <p>No file uploaded</p>

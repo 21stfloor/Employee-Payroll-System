@@ -37,7 +37,7 @@ export default {
             .catch(error => {
               console.error('Failed to give penalty:', error);
             });
-        }, 5000); // 60000 milliseconds = 1 minute
+        }, 60000); // 60000 milliseconds = 1 minute
 
 
         const alert = Swal.fire({

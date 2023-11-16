@@ -21,7 +21,7 @@ while True:
 
     # Start monitoring cursor movement
     with Listener(on_move=on_move) as listener:
-        time.sleep(5)  # Wait for 5 seconds
+        time.sleep(60)  # Wait for 5 seconds
         listener.stop()  # Stop monitoring
 
     # If no movement detected, send POST request with local IP

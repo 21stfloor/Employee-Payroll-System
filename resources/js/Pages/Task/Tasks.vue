@@ -66,7 +66,7 @@ defineProps({
                                     }}
                                     <span class="text-red-500 text-xs font-bold"
                                         v-if="!$page.props.auth.user.roles.includes('admin') && task.status !== 'Pending' && !task.is_seen">
-                                        <sup>**</sup>
+                                        
                                     </span>
                                 </TableBody>
                             </TableRow>

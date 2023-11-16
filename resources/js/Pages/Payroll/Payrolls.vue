@@ -51,7 +51,7 @@ watch(status, filter);
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <Card class="!mt-0">
                     <h1 class="card-header !mb-4">{{__('Payrolls')}}</h1>
-                    <a :href="route('monthly-payrolls')" target="blank" class="font-medium text-purple-600 dark:text-purple-500 hover:underline">Run Monthly Payrolls (Manually)</a>
+                    <a v-if="$page.props.auth.user.roles.includes('admin')" :href="route('monthly-payrolls')" target="blank" class="font-medium text-purple-600 dark:text-purple-500 hover:underline">Run Monthly Payrolls (Manually)</a>
 
                     <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
                         <div>

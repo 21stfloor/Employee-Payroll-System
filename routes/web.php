@@ -39,6 +39,8 @@ Route::group(['middleware' => ['role:admin', 'auth']], function () {
 
     Route::resource('performance', \App\Http\Controllers\PerformanceController::class)->only(['index']);
 
+    // Route::resource('performance/employee/', \App\Http\Controllers\PerformanceController::class);
+
     // Globals
     // Route::get('globals', [\App\Http\Controllers\GlobalsController::class, 'index'])->name('globals.index');
     // Route::get('globals/edit', [\App\Http\Controllers\GlobalsController::class, 'edit'])->name('globals.edit');
@@ -76,6 +78,9 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::resource('tasks', \App\Http\Controllers\TaskController::class)->only(['index', 'show', 'update']);
     Route::post('tasks/{id}', [\App\Http\Controllers\TaskController::class, 'update'])->name('zzz.update');
     Route::resource('payrolls', \App\Http\Controllers\PayrollController::class)->only(['index', 'show']);
+
+    Route::get('employee/performance', [\App\Http\Controllers\PerformanceController::class, 'employee'])->name('performance.employee');
+
     // Route::get('calendar', [\App\Http\Controllers\CalendarController::class, 'calendarIndex'])->name('calendar.index');
 
     Route::get('my-attendance', [\App\Http\Controllers\AttendanceController::class, 'attendanceDashboard'])->name('attendance.dashboard');

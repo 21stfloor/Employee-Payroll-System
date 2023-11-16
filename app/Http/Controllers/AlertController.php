@@ -44,7 +44,7 @@ class AlertController extends Controller
             'start_date' => date('Y-m-d'),
             'employee_id' => $admin->id,
             'receiver_id' => Auth::user()->id,
-            'message' => 'This is an complaint request. Reason: inactivity',
+            'message' => 'This is an automated complaint request. Reason: inactivity',
         ]);
         // return 'alert!';
         return 'Penalty given!';

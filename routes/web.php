@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('alert', [\App\Http\Controllers\AlertController::class, 'index'])->name('alert.index');
+Route::post('alert/givepenalty', [\App\Http\Controllers\AlertController::class, 'givePenalty'])->name('alert.give-penalty');
 
 Route::group(['middleware' => ['role:admin', 'auth']], function () {
 

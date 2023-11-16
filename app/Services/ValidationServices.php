@@ -233,6 +233,15 @@ Class ValidationServices extends Controller {
         ], $this->validationMessages);
     }
 
+    public function validateTaskCreationDetails($request)
+    {
+        return $request->validate([
+            'due_date' => ['array','size:2'],
+            'due_date.*' => ['nullable', 'date_format:Y-m-d'],
+            'description' => ['required', 'string'],
+        ], $this->validationMessages);
+    }
+
     public function validateMassAttendanceCreation($request)
     {
         $rules = [

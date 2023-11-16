@@ -47,6 +47,7 @@ class HandleInertiaRequests extends Middleware
                 'reqCount'=> $request->user() ? ( isAdmin() ? \App\Models\Request::where('status', 0)->count() :
                                         \App\Models\Request::where('employee_id', auth()->user()->id)
                                             ->where('status', '!=', 0)->where('is_seen', false)->count()) : null,
+                'taskCount'=> $request->user() ? \App\Models\Task::where('status', 0)->count() : null,
             ],
             'session' => [
                 'update_in_progress' => session('update_in_progress'),

@@ -8,7 +8,7 @@ import {useDark, useToggle} from "@vueuse/core";
 import EmployeeIcon from "@/Components/Icons/UsersIcon.vue";
 import OrganizationIcon from "@/Components/Icons/OrganizationIcon.vue";
 import MessageIcon from "@/Components/Icons/MessageIcon.vue";
-import CalendarIcon from "@/Components/Icons/CalendarIcon.vue";
+import TaskIcon from "@/Components/Icons/TaskIcon.vue";
 import TableIcon from "@/Components/Icons/TableIcon.vue";
 import MoneyIcon from "@/Components/Icons/MoneyIcon.vue";
 import RocketIcon from "@/Components/Icons/RocketIcon.vue";
@@ -83,6 +83,13 @@ function changeLanguage(locale){
                     <MessageIcon class="text-gray-500 dark:text-gray-100"/>
                 </SidebarListItem>
 
+                <SidebarListItem :item-name="__('Tasks')" :hasBadge="($page.props.ui.taskCount.toString() !== '0')"
+                                 badge="number" :badge-content="$page.props.ui.taskCount.toString() ?? '?'"
+                                 link="tasks.index" :active-links="['tasks.index', 'tasks.create',
+                 'tasks.show', 'tasks.edit']">
+                    <TaskIcon class="text-gray-500 dark:text-gray-100"/>
+                </SidebarListItem>
+
                 <!-- <SidebarListItem :item-name="__('Calendar')" link="calendar.index"
                                  :activeLinks="['calendar.index', 'calendars.index', 'calendars.create',
                  'calendars.show', 'calendars.edit']">
@@ -126,6 +133,14 @@ function changeLanguage(locale){
                                  :active-links="['requests.index', 'requests.show', 'requests.create']"
                 >
                     <MessageIcon class="text-gray-500 dark:text-gray-100"/>
+                </SidebarListItem>
+
+                <SidebarListItem :item-name="__('Tasks')" :hasBadge="($page.props.ui.taskCount.toString() !== '0')"
+                                 badge="number" :badge-content="$page.props.ui.taskCount.toString() ?? '?'"
+                                 link="tasks.index"
+                                 :active-links="['tasks.index', 'tasks.show', 'tasks.create']"
+                >
+                    <TaskIcon class="text-gray-500 dark:text-gray-100"/>
                 </SidebarListItem>
 
                 <SidebarListItem :item-name="__('My Payrolls')"

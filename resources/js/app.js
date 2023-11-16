@@ -17,7 +17,7 @@ dayjs.extend(utc)
 dayjs.extend(timezone)
 
 
-const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'HRS';
+const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'ScreenTime';
 
 const toastOptions = {
     position: POSITION.BOTTOM_RIGHT,        // ToastOptions object for each type of toast

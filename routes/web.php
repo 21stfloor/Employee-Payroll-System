@@ -25,7 +25,7 @@ Route::group(['middleware' => ['role:admin', 'auth']], function () {
     Route::resource('shifts', \App\Http\Controllers\ShiftController::class);
     // Route::resource('metrics', \App\Http\Controllers\MetricsController::class);
     Route::resource('requests', \App\Http\Controllers\RequestController::class);
-
+    Route::resource('tasks', \App\Http\Controllers\TaskController::class)->only(['index', 'show', 'create', 'store', 'update']);
     // Payroll
     Route::put('payrolls/{id}/updateStatus', [\App\Http\Controllers\PayrollController::class, 'updateStatus'])->name('payrolls.updateStatus');
     Route::resource('payrolls', \App\Http\Controllers\PayrollController::class);
@@ -59,6 +59,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('my-profile', [\App\Http\Controllers\EmployeeController::class, 'showMyProfile'])->name('my-profile');
     Route::resource('requests', \App\Http\Controllers\RequestController::class)->only(['index', 'show', 'create', 'store', 'update']);
+    Route::resource('tasks', \App\Http\Controllers\TaskController::class)->only(['index', 'show', 'update']);
+    Route::post('tasks/{id}', [\App\Http\Controllers\TaskController::class, 'update'])->name('tasks.update');
     Route::resource('payrolls', \App\Http\Controllers\PayrollController::class)->only(['index', 'show']);
     // Route::get('calendar', [\App\Http\Controllers\CalendarController::class, 'calendarIndex'])->name('calendar.index');
 

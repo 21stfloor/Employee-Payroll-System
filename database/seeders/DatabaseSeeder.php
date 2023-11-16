@@ -58,6 +58,7 @@ class DatabaseSeeder extends Seeder
             'phone' => '09954261220',
             'employee_id' => '29904268801154',
             'hired_on' => '2023-01-01',
+            'address' => 'Dasmariñas City',
             'password' => '$2y$10$7BMn8WlpLkUB64fCCCVCvuFbqp4dO34dLL/a7MjMdoITz0FOIOZ.G', // password
         ]);
         $emp = Employee::factory()->create([
@@ -66,6 +67,7 @@ class DatabaseSeeder extends Seeder
             'phone' => '09954261220',
             'employee_id' => '29904268801155',
             'hired_on' => '2023-01-01',
+            'address' => 'Dasmariñas City',
             'password' => '$2y$10$7BMn8WlpLkUB64fCCCVCvuFbqp4dO34dLL/a7MjMdoITz0FOIOZ.G', // passwprd
         ]);
 

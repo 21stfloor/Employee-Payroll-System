@@ -11,7 +11,7 @@
 export default {
   data() {
     return {
-      favicon: '/favicon.ico', // Use the imported image as src
+      favicon: '/logo.png', // Use the imported image as src
     };
   },
 };

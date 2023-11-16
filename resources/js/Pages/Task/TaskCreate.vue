@@ -35,7 +35,7 @@ const submitForm = () => {
         }
     });
     console.log(form.due_date);
-    form.post(route('tasks.store'), {
+    form.post(route('zzz.store'), {
         preserveScroll: true,
         onError: () => {
             useToast().error(__('Error Creating Task'));

@@ -16,6 +16,7 @@ import UserIcon from "@/Components/Icons/UserIcon.vue";
 import "/node_modules/flag-icons/css/flag-icons.min.css";
 import {router} from "@inertiajs/vue3";
 import { BxSolidDownload } from "@kalimahapps/vue-icons";
+import { AnOutlinedBarChart } from "@kalimahapps/vue-icons";
 
 const showingNavigationDropdown = ref(false);
 const isDark = useDark();
@@ -86,16 +87,10 @@ function changeLanguage(locale){
 
                 <SidebarListItem :item-name="__('Tasks')" :hasBadge="($page.props.ui.taskCount.toString() !== '0')"
                                  badge="number" :badge-content="$page.props.ui.taskCount.toString() ?? '?'"
-                                 link="tasks.index" :active-links="['tasks.index', 'tasks.create',
-                 'tasks.show', 'tasks.edit']">
+                                 link="zzz.index" :active-links="['zzz.index', 'zzz.create',
+                 'zzz.show', 'zzzz.edit']">
                     <TaskIcon class="text-gray-500 dark:text-gray-100"/>
                 </SidebarListItem>
-
-                <!-- <SidebarListItem :item-name="__('Calendar')" link="calendar.index"
-                                 :activeLinks="['calendar.index', 'calendars.index', 'calendars.create',
-                 'calendars.show', 'calendars.edit']">
-                    <CalendarIcon class="text-gray-500 dark:text-gray-100"/>
-                </SidebarListItem> -->
 
                 <SidebarListItem :item-name="__('Attendance')" link="attendances.index"
                                  :activeLinks="['attendance.dashboard', 'attendance.show', 'attendances.index', 'attendances.create']">
@@ -106,6 +101,11 @@ function changeLanguage(locale){
                                  :activeLinks="['payrolls.index', 'payrolls.show', 'payrolls.edit']"
                 >
                     <MoneyIcon class="text-gray-500 dark:text-gray-100"/>
+                </SidebarListItem>
+
+                <SidebarListItem :item-name="__('Performance')" link="performance.index"
+                                 :activeLinks="['performance.index']">
+                    <AnOutlinedBarChart class="text-gray-500 dark:text-gray-100"/>
                 </SidebarListItem>
 
                 <SidebarListItem :item-name="__('Downloads')" :hasBadge="false" link="downloads.index"
@@ -143,8 +143,8 @@ function changeLanguage(locale){
 
                 <SidebarListItem :item-name="__('Tasks')" :hasBadge="($page.props.ui.taskCount.toString() !== '0')"
                                  badge="number" :badge-content="$page.props.ui.taskCount.toString() ?? '?'"
-                                 link="tasks.index"
-                                 :active-links="['tasks.index', 'tasks.show', 'tasks.create']"
+                                 link="zzz.index"
+                                 :active-links="['zzz.index', 'tasks.show', 'zzz.create']"
                 >
                     <TaskIcon class="text-gray-500 dark:text-gray-100"/>
                 </SidebarListItem>

@@ -30,7 +30,7 @@ defineProps({
                 <Card class="!mt-0">
                     <div class="flex justify-between items-center pb-4">
                         <h1 class="card-header !mb-4">{{__('Current Tasks')}}</h1>
-                        <FlexButton v-if="$page.props.auth.user.roles.includes('admin')" :href="route('tasks.create')"
+                        <FlexButton v-if="$page.props.auth.user.roles.includes('admin')" :href="route('zzz.create')"
                                     :text="__('Initiate A Task')">
                             <PlusIcon/>
                         </FlexButton>
@@ -42,18 +42,22 @@ defineProps({
                             <TableHead>{{__('Description')}}</TableHead>
                             <TableHead>{{__('Start Date')}}</TableHead>
                             <TableHead>{{__('End Date')}}</TableHead>
+                            <TableHead>{{__('Date Taken')}}</TableHead>
+                            <TableHead>{{__('Date Completed')}}</TableHead>
                             <TableHead>{{__('Status')}}</TableHead>
                         </template>
 
                         <!--Iterate Here-->
                         <template #Body>
                             <TableRow v-for="task in tasks.data" :key="task.id">
-                                <TableBodyHeader :href="route('tasks.show', {id: task.id})">{{task.id}}</TableBodyHeader>
-                                <TableBodyHeader :href="route('tasks.show', {id: task.id})" >{{task.employee_name}}</TableBodyHeader>
-                                <TableBodyHeader :href="route('tasks.show', {id: task.id})" >{{task.description}}</TableBodyHeader>
-                                <TableBody :href="route('tasks.show', {id: task.id})">{{task.start_date}}</TableBody>
-                                <TableBody :href="route('tasks.show', {id: task.id})">{{task.end_date ?? __('N/A')}}</TableBody>
-                                <TableBody :href="route('tasks.show', {id: task.id})">
+                                <TableBodyHeader :href="route('zzz.show', {id: task.id})">{{task.id}}</TableBodyHeader>
+                                <TableBodyHeader :href="route('zzz.show', {id: task.id})" >{{task.employee_name}}</TableBodyHeader>
+                                <TableBodyHeader :href="route('zzz.show', {id: task.id})" >{{task.description}}</TableBodyHeader>
+                                <TableBody :href="route('zzz.show', {id: task.id})">{{task.start_date}}</TableBody>
+                                <TableBody :href="route('zzz.show', {id: task.id})">{{task.end_date == null? __('N/A') : task.end_date}}</TableBody>
+                                <TableBody :href="route('zzz.show', {id: task.id})">{{task.date_taken == null ? __('N/A'): task.date_taken}}</TableBody>
+                                <TableBody :href="route('zzz.show', {id: task.id})">{{task.date_completed == null ? __('N/A'): task.date_completed}}</TableBody>
+                                <TableBody :href="route('zzz.show', {id: task.id})">
                                     {{  task.status === "Available" ? task_status_types['available'] + ' ❇️' :
                                         task.status === "Ongoing" ? task_status_types['ongoing'] + ' ⏳' :
                                         task.status === "Done" ? task_status_types['done'] + ' ✅' :

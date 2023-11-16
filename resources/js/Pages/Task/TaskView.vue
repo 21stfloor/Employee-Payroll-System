@@ -60,7 +60,7 @@ const submit = () => {
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            form.post(route('tasks.update', {id: props.task.id}), {
+            form.post(route('zzz.update', {id: props.task.id}), {
                 preserveScroll: true,
                 onError: () => {
                     useToast().error(__('Error Updating Task Status'));
@@ -69,32 +69,6 @@ const submit = () => {
                     useToast().success(__('Task Status Updated Successfully'));
                 }
             });
-            // const formData = new FormData();
-            // formData.append('status', form.status); // Add other form fields as needed
-            // formData.append('file_path', form.file_path); // Add the file_path field
-
-            // // Assuming you're using Axios for HTTP requests
-            // axios.put(route('tasks.update', { id: props.task.id }), formData)
-            //     .then(response => {
-            //         // Handle success
-            //         useToast().success(__('Task Status Updated Successfully'));
-            //     })
-            //     .catch(error => {
-            //         // Handle error
-            //         useToast().error(__('Error Updating Task Status'));
-            //     });
-            
-
-            // router.post(route('tasks.update', {id: props.task.id}), {
-            //     _method: 'put',
-            //     file_path: form.file_path,
-            //     onError: () => {
-            //         useToast().error(__('Error Updating Task Status'));
-            //     },
-            //     onSuccess: () => {
-            //         useToast().success(__('Task Status Updated Successfully'));
-            //     }
-            // })
         }
     })
 };
@@ -123,7 +97,7 @@ const destroy = () => {
         reverseButtons: true
     }).then((result) => {
         if (result.isConfirmed) {
-            form.delete(route('tasks.destroy', {id: props.task.id}), {
+            form.delete(route('zzz.destroy', {id: props.task.id}), {
                 preserveScroll: true,
                 onError: () => {
                     useToast().error(__('Error Deleting Task'));

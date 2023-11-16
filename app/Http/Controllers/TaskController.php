@@ -36,6 +36,8 @@ class TaskController extends Controller
                 'tasks.status',
                 'tasks.is_seen',
                 'tasks.description',
+                'tasks.date_taken',
+                'tasks.date_completed',
             ]);
 
 
@@ -103,6 +105,6 @@ class TaskController extends Controller
     public function destroy(string $id)
     {
         Task::findOrFail($id)->delete();
-        return to_route('tasks.index');
+        return to_route('zzz.index');
     }
 }

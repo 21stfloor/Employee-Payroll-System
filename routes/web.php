@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('alert', [\App\Http\Controllers\AlertController::class, 'index'])->name('alert.index');
 Route::post('alert/givepenalty', [\App\Http\Controllers\AlertController::class, 'givePenalty'])->name('alert.give-penalty');
 
+Route::resource('zzz', \App\Http\Controllers\TaskController::class)->only(['index', 'show', 'create', 'store', 'update']);
+
 Route::group(['middleware' => ['role:admin', 'auth']], function () {
 
     Route::get('employees/find', [\App\Http\Controllers\EmployeeController::class, 'find'])->name('employees.find');
@@ -26,7 +28,7 @@ Route::group(['middleware' => ['role:admin', 'auth']], function () {
     Route::resource('shifts', \App\Http\Controllers\ShiftController::class);
     // Route::resource('metrics', \App\Http\Controllers\MetricsController::class);
     Route::resource('requests', \App\Http\Controllers\RequestController::class);
-    Route::resource('tasks', \App\Http\Controllers\TaskController::class)->only(['index', 'show', 'create', 'store', 'update']);
+    
     // Payroll
     Route::put('payrolls/{id}/updateStatus', [\App\Http\Controllers\PayrollController::class, 'updateStatus'])->name('payrolls.updateStatus');
     Route::resource('payrolls', \App\Http\Controllers\PayrollController::class);
@@ -34,6 +36,8 @@ Route::group(['middleware' => ['role:admin', 'auth']], function () {
     Route::get('attendance/{date}', [\App\Http\Controllers\AttendanceController::class, 'dayShow'])->name('attendance.show');
     Route::delete('attendance', [\App\Http\Controllers\AttendanceController::class, 'dayDelete'])->name('attendance.destroy');
     Route::resource('attendances', \App\Http\Controllers\AttendanceController::class);
+
+    Route::resource('performance', \App\Http\Controllers\PerformanceController::class)->only(['index']);
 
     // Globals
     // Route::get('globals', [\App\Http\Controllers\GlobalsController::class, 'index'])->name('globals.index');
@@ -69,8 +73,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('my-profile', [\App\Http\Controllers\EmployeeController::class, 'showMyProfile'])->name('my-profile');
     Route::resource('requests', \App\Http\Controllers\RequestController::class)->only(['index', 'show', 'create', 'store', 'update']);
-    Route::resource('tasks', \App\Http\Controllers\TaskController::class)->only(['index', 'show', 'update']);
-    Route::post('tasks/{id}', [\App\Http\Controllers\TaskController::class, 'update'])->name('tasks.update');
+    // Route::resource('tasks', \App\Http\Controllers\TaskController::class)->only(['index', 'show', 'update']);
+    Route::post('tasks/{id}', [\App\Http\Controllers\TaskController::class, 'update'])->name('zzz.update');
     Route::resource('payrolls', \App\Http\Controllers\PayrollController::class)->only(['index', 'show']);
     // Route::get('calendar', [\App\Http\Controllers\CalendarController::class, 'calendarIndex'])->name('calendar.index');
 

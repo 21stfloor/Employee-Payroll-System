@@ -25,7 +25,7 @@ class TaskServices
 
         \App\Models\Task::create($task);
 
-        return to_route('tasks.index');
+        return to_route('zzz.index');
     }
     public function updateTask(Request $request, $id)
     {
@@ -38,16 +38,22 @@ class TaskServices
         $taskData['employee_id'] = $request->user()->id;
         $empTask = \App\Models\Task::findOrFail($id);
 
-        
-
         // Check if file_path exists in the request and is not empty
         if ($request->hasFile('file_path')) {
             // Call the uploadFile function passing the file path
             $taskData['file_path'] = $this->uploadFile($request->file('file_path'));
         }
 
+        // Update the specific columns based on the status
+        if ($taskData['status'] == 2) {
+            $taskData['date_completed'] = now();
+        } elseif ($taskData['status'] == 1) {
+            $taskData['date_taken'] = now();
+        }
+        
         $empTask->update($taskData);
     }
+
 
     public function validateTaskCreationDetails(Request $request)
     {

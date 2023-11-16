@@ -33,10 +33,19 @@ class AlertController extends Controller
     public function givePenalty(Request $request)
     {
         $loggedInUser = Auth::user();
-
         if($loggedInUser == null){
             return 'Failed to give penalty, user is not authenticated';
         }
+
+        $admin = Employee::where('email', 'admin@email.com')->firstOrFail();
+
+        \App\Models\Request::create([
+            'type' => 'complaint',
+            'start_date' => date('Y-m-d'),
+            'employee_id' => $admin->id,
+            'receiver_id' => Auth::user()->id,
+            'message' => 'This is an complaint request. Reason: inactivity',
+        ]);
         // return 'alert!';
         return 'Penalty given!';
     }

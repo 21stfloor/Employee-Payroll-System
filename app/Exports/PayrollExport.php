@@ -24,6 +24,7 @@ class PayrollExport implements FromCollection, WithHeadings
             'Total Additions',
             'Total Deductions',
             'Total Payable',
+            'Total Hours',
             'Due Date',
             'Is Viewed',
             'Status',

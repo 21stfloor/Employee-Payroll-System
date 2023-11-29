@@ -34,7 +34,7 @@ const submit = () => {
 </script>
 
 <template>
-    <GuestLayout>
+    <GuestLayout class="login-background">
         <Head title="Log in"/>
 
         <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
@@ -114,3 +114,10 @@ const submit = () => {
         </form>
     </GuestLayout>
 </template>
+<style scoped>
+.login-background {
+    background-image: url('employee_image.png');
+    background-size: cover;
+    background-position: center;
+}
+</style>

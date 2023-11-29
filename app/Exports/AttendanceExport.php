@@ -17,6 +17,7 @@ class AttendanceExport implements FromCollection, WithHeadings
     {
         return [
             'ID',
+            'Employee Name',
             'Employee ID',
             'Date',
             'Status',

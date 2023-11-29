@@ -42,6 +42,7 @@ Class ValidationServices extends Controller {
             'branch_id' => ['required', 'integer'],
             'department_id' => ['required', 'integer'],
             'is_remote' => ['required', 'boolean'],
+            'is_active' => ['required', 'boolean'],
 
             'shift_id' => ['required', 'integer'],
             'position_id' => ['required', 'integer'],
@@ -67,6 +68,7 @@ Class ValidationServices extends Controller {
             'branch_id' => ['required', 'integer'],
             'department_id' => ['required', 'integer'],
             'is_remote' => ['required', 'boolean'],
+            'is_active' => ['required', 'boolean'],
 
             'shift_id' => ['required', 'integer'],
             'position_id' => ['required', 'integer'],

@@ -202,7 +202,7 @@ const destroy = () => {
                                             </div>                                            
                                         </div>
 
-                                    <div v-if="ongoingTasksCount < 5">
+                                    <div v-if="ongoingTasksCount < 1">
                                         
                                         <GenericButton v-if="task.status === 'Available' && task.employee == null" :text="__('Accept Task')"
                                                     @click="form.status = 1; message=__('accept');"
@@ -212,7 +212,7 @@ const destroy = () => {
                                         </GenericButton>
                                     </div>
                                     <div v-else-if="task.status === 'Available'">
-                                        <p>You can only do 5 tasks at a time</p>
+                                        <p>You can only do 1 tasks at a time</p>
                                     </div>
                                     <GenericButton v-if="(task.status === 'Ongoing' || task.status === 'Rejected')  && task.employee != null && task.employee.id == $page.props.auth.user.id" :text="__('Mark as Done')"
                                                    @click="form.status = 2; message=__('done');"

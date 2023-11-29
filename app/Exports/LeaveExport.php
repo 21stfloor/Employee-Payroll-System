@@ -17,11 +17,14 @@ class LeaveExport implements FromCollection, WithHeadings
     {
         return [
             'ID',
+            'Name',
             'Employee ID',
             'Date',
             'Status',
+            'Reason',
             'Sign In Time',
             'Sign Off Time',
+            'Days of Absence',
             'Notes',
             'Manually Filled',
             'Created At',

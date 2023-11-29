@@ -32,6 +32,7 @@ class EmployeeServices
             'department_id' => $res['department_id'],
             'is_remote' => $res['is_remote'],
             'password' => $res['password'],
+            'is_active' => $res['is_active'],
         ]);
 
         // Salary Registration
@@ -91,6 +92,7 @@ class EmployeeServices
             'branch_id' => $res['branch_id'],
             'department_id' => $res['department_id'],
             'is_remote' => $res['is_remote'],
+            'is_active' => $res['is_active'],
         ]);
 
         // Update Shifts, Salary, Position, and Permissions

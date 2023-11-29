@@ -54,21 +54,46 @@ const chartOptions = {
   responsive: true,
 };
 
+
+const departments = ['HR', 'Engineering', 'Marketing', 'Sales'];
+let selectedDepartment = '';
+
 console.log(props.tasks);
 </script>
 
 <template>
   <Head :title="__('Employee Performance')" />
-  <AuthenticatedLayout>
-    <div class="py-8">
-      <div class="flex flex-col md:flex-row justify-between md:gap-4" v-if="tasks">
-        <Card class="!p-2 w-full">
-          <h1 class="text-2xl">{{ __('Emplyee Performance') }}<small> (Task Done)</small></h1>
-          <div class="flex flex-wrap justify-center gap-4">
-            <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
-          </div>
-        </Card>
+  <!-- display the datasets: props.tasks to show the number of tasks accomplished -->
+    <AuthenticatedLayout>
+      <div class="py-8">
+        <div class="flex flex-col md:flex-row justify-between md:gap-4" v-if="tasks">
+          <Card class="!p-2 w-full">
+            <h1 class="text-2xl">{{ __('Employee Performance') }}<small> (Task Done)</small></h1>
+            
+            <div class="flex flex-wrap justify-center gap-4">
+              <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+            </div>
+            
+
+            <select v-model="selectedDepartment" class="dropdown">
+              <option disabled value="">Please select a department</option>
+              <option v-for="department in departments" :key="department">{{ department }}</option>
+            </select>
+          </Card>
+        </div>
       </div>
-    </div>
-  </AuthenticatedLayout>
-</template>
+    </AuthenticatedLayout>
+  </template>
+<style scoped>
+.dropdown {
+  background-color: white;
+  color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dropdown {
+    background-color: #333;
+    color: white;
+  }
+}
+</style>

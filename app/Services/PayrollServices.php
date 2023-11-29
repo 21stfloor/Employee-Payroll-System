@@ -26,6 +26,7 @@ class PayrollServices
             'total_deductions' => 0,
             'total_additions' => 0,
             'total_payable' => $payroll->base,
+            'total_hours' => 0,
             'is_reviewed' => true,
             'status' => true, // paid
         ]);
@@ -91,6 +92,7 @@ class PayrollServices
             'total_deductions' => $payroll->deductions->getSum(),
             'total_additions' => $payroll->additions->getSum(),
             'total_payable' => $payroll->base * $res['performance_multiplier'] + $payroll->additions->getSum() - $payroll->deductions->getSum(),
+            'total_hours' => $hours['hoursDifference'],
             'is_reviewed' => true,
         ]);
 

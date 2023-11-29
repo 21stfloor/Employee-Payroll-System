@@ -105,11 +105,12 @@ class AttendanceServices
             // If there is no attendance record for the employee on the date, create it
             Attendance::create([
                 'date' => $res['date'],
+                'name' => Employee::find($res['employee_id'][$i])->name,
                 'employee_id' => $res['employee_id'][$i],
                 'status' => $res['status'][$i],
                 'sign_in_time' => Carbon::createFromTime($res['sign_in_time'][$i]['hours'], $res['sign_in_time'][$i]['minutes'], $res['sign_in_time'][$i]['seconds'])->format('H:i:s'),
                 'sign_off_time' => Carbon::createFromTime($res['sign_off_time'][$i]['hours'], $res['sign_off_time'][$i]['minutes'], $res['sign_off_time'][$i]['seconds'])->format('H:i:s'),
-                'notes' => $res['notes'][$i],
+                'notes' => $res['notes'][$i],   
             ]);
         }
 
@@ -145,6 +146,7 @@ class AttendanceServices
         // If there is an attendance record for the employee on the date, update it
         Attendance::firstOrCreate(
             [
+                "name" => Employee::find($request->id)->name,
                 "employee_id" => $request->id,
                 "date" => $today,
             ],

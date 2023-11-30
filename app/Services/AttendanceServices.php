@@ -93,7 +93,7 @@ class AttendanceServices
                     'status' => $res['status'][$i],
                     'sign_in_time' => Carbon::createFromTime($res['sign_in_time'][$i]['hours'], $res['sign_in_time'][$i]['minutes'], $res['sign_in_time'][$i]['seconds'])->format('H:i:s'),
                     'sign_off_time' => Carbon::createFromTime($res['sign_off_time'][$i]['hours'], $res['sign_off_time'][$i]['minutes'], $res['sign_off_time'][$i]['seconds'])->format('H:i:s'),
-                    'notes' => $res['notes'][$i],
+                    // 'notes' => $res['notes'][$i],
                 ]);
                 // In case there are more than 1 attendance records for the employee on the date, delete them
                 for ($j = 1; $j < count($empAtt); $j++) {
@@ -110,7 +110,7 @@ class AttendanceServices
                 'status' => $res['status'][$i],
                 'sign_in_time' => Carbon::createFromTime($res['sign_in_time'][$i]['hours'], $res['sign_in_time'][$i]['minutes'], $res['sign_in_time'][$i]['seconds'])->format('H:i:s'),
                 'sign_off_time' => Carbon::createFromTime($res['sign_off_time'][$i]['hours'], $res['sign_off_time'][$i]['minutes'], $res['sign_off_time'][$i]['seconds'])->format('H:i:s'),
-                'notes' => $res['notes'][$i],   
+                // 'notes' => $res['notes'][$i],   
             ]);
         }
 
@@ -154,8 +154,8 @@ class AttendanceServices
                 "sign_in_time" => $currentTimestamp,
                 "sign_off_time" => null,
                 "status" => $status,
-                "notes" => "Sign-in Manually filled by employee",
-                "is_manually_filled" => true,
+                // "notes" => "Sign-in Manually filled by employee",
+                // "is_manually_filled" => true,
             ]
         );
         return to_route('dashboard.index');

@@ -10,7 +10,14 @@ class LeaveExport implements FromCollection, WithHeadings
 {
     public function collection()
     {
-        return Attendance::where('status', 'missed')->get();
+        $data = Attendance::where('status', 'missed')->get();
+        
+        foreach ($data as $key => $item) {
+            unset($data[$key]->created_at);
+            unset($data[$key]->updated_at);
+        }
+
+        return $data;
     }
 
     public function headings(): array
@@ -22,13 +29,13 @@ class LeaveExport implements FromCollection, WithHeadings
             'Date',
             'Status',
             'Reason',
-            'Sign In Time',
-            'Sign Off Time',
+            // 'Sign In Time',
+            // 'Sign Off Time',
             'Days of Absence',
-            'Notes',
-            'Manually Filled',
-            'Created At',
-            'Updated At',
+            // 'Notes',
+            // 'Manually Filled',
+            // 'Created At',
+            // 'Updated At',
             // Add more columns as needed
         ];
     }

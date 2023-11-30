@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -67,6 +68,8 @@ Route::group(['middleware' => ['role:admin', 'auth']], function () {
 
 // Logged
 Route::group(['middleware' => ['auth']], function () {
+    
+
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -87,6 +90,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('attendance/signin', [\App\Http\Controllers\AttendanceController::class, 'dashboardSignInAttendance'])->name('attendance.dashboardSignIn');
     Route::post('attendance/signoff', [\App\Http\Controllers\AttendanceController::class, 'dashboardSignOffAttendance'])->name('attendance.dashboardSignOff');
 
+    Route::get('/images', [ImageController::class, 'index']);
+    Route::post('/images', [ImageController::class, 'store']);
 });
 
 // Redirect authenticated users to the dashboard

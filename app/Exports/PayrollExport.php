@@ -18,6 +18,7 @@ class PayrollExport implements FromCollection, WithHeadings
         return [
             'ID',
             'Employee ID',
+            'Employee Name',
             'Currency',
             'Base',
             'Performance Multiplier',
@@ -25,11 +26,11 @@ class PayrollExport implements FromCollection, WithHeadings
             'Total Deductions',
             'Total Payable',
             'Total Hours',
-            'Due Date',
-            'Is Viewed',
-            'Status',
-            'Created At',
-            'Updated At',
+            // 'Due Date',
+            // 'Is Viewed',
+            // 'Status',
+            // 'Created At',
+            // 'Updated At',
             // Add more columns as needed
         ];
     }

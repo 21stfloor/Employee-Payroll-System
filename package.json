@@ -20,6 +20,8 @@
     },
     "dependencies": {
         "@headlessui/vue": "^1.7.14",
+        "@inertiajs/inertia": "^0.11.1",
+        "@inertiajs/inertia-vue3": "^0.6.0",
         "@kalimahapps/vue-icons": "^1.4.0",
         "@vuepic/vue-datepicker": "^5.2.1",
         "@vueuse/core": "^10.2.1",

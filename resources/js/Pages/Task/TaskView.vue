@@ -244,7 +244,8 @@ const destroy = () => {
                                 <div v-if="task.status != 'Available' && task.status != 'Ongoing'">
                                     <div v-if="task.file_path">
                                         <p>File uploaded:</p>
-                                        <a :href="'/tasks/' + task.file_path" download class="font-medium text-purple-600 dark:text-purple-500 hover:underline">Download File</a>
+                                        <!-- <a :href="'/tasks/' + task.file_path" download class="font-medium text-purple-600 dark:text-purple-500 hover:underline">Download File</a> -->
+                                        <img :src="'/tasks/' + task.file_path" alt="Uploaded file" class="w-full h-auto" />
                                     </div>
                                     <div v-else>
                                         <p>No file uploaded</p>
